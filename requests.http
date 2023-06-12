@@ -1,2 +1,15 @@
 http://localhost:8080/exam/java/add?question=QuestionText&answer=QuestionAnswer
-
+###
+http://localhost:8080/exam/java/add?question=aaa&answer=bbb
+###
+http://localhost:8080/exam/java/remove?question=QuestionText&answer=QuestionAnswer
+###
+http://localhost:8080/exam/java
+###
+http://localhost:8080/exam/math/add?question=QuestionText&answer=QuestionAnswer
+###
+http://localhost:8080/exam/math/remove?question=QuestionText&answer=QuestionAnswer
+###
+http://localhost:8080/exam/math
+###
+http://localhost:8080/exam/5
