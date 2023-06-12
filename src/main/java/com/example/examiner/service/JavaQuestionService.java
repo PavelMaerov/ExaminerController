@@ -3,19 +3,17 @@ package com.example.examiner.service;
 import com.example.examiner.Question;
 import com.example.examiner.exception.RepositoryIsEmptyException;
 import com.example.examiner.exception.NoQuestionsLeftException;
-import com.example.examiner.repository.JavaQuestionRepository;
 import com.example.examiner.repository.QuestionRepository;
-//import com.example.examiner.service.QuestionService;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
 public class JavaQuestionService implements QuestionService {
-    private QuestionRepository repository;
-    Random random = new Random();
+    private final QuestionRepository repository;
+    private final Random random = new Random();
 
-    public JavaQuestionService(JavaQuestionRepository repository) {
+    public JavaQuestionService(QuestionRepository repository) {
         this.repository = repository;
     }
 
@@ -47,6 +45,7 @@ public class JavaQuestionService implements QuestionService {
 
     @Override
     public Question getRandomQuestion(Set<Question> alreadyUsed) {
+        //System.out.println("Java.getRandomQuestion вход");
         Collection<Question> questions=repository.getAll();
         if (questions.isEmpty()) throw new RepositoryIsEmptyException();
 
@@ -67,6 +66,10 @@ public class JavaQuestionService implements QuestionService {
             currentQuestion = iterator.next();
             if (!alreadyUsed.contains(currentQuestion)) i++;
         }
+        //System.out.println("variants="+variants+" variant="+variant+" "+currentQuestion);
+        //System.out.println("Java.getRandomQuestion выход");
+
+        //можно было бы добавить сюда пополнение alreadyUsed, но он может быть иммутабельным Collections.emptySet()
         return currentQuestion;
     }
 }

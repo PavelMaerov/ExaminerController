@@ -1,12 +1,16 @@
 package com.example.examiner;
 
+import com.example.examiner.exception.EmptyStringException;
+
 import java.util.Objects;
 
-public class Question {
+public class Question implements Comparable<Question> {
     private final String question;
     private final String answer;
 
     public Question(String question, String answer) {
+        if (question==null || answer==null || question.isEmpty() || answer.isEmpty())
+            throw new EmptyStringException();
         this.question = question;
         this.answer = answer;
     }
@@ -37,5 +41,10 @@ public class Question {
                 "question='" + question + '\'' +
                 ", answer='" + answer + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Question o) {
+        return (question + " " + answer).compareTo(o.getQuestion() + " " + o.getAnswer());
     }
 }
